@@ -30,7 +30,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ openModal }) => {
 	return (
 		<form
 			onSubmit={handleSubmit}
-			className='container sticky top-0 mt-10 flex flex-col items-center justify-center space-y-4 pt-24 md:flex-row md:space-x-4 md:space-y-0'
+			className='container top-0 mt-10 flex flex-col items-center justify-center space-y-4 pt-24 md:flex-row md:space-x-4 md:space-y-0'
 		>
 			<input
 				className='h-10 w-full rounded-lg border-2 border-gray-300 bg-white px-5 pr-16 text-sm focus:outline-none md:w-1/2'
