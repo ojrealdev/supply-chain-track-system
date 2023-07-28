@@ -1,15 +1,16 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import Ajv from 'ajv';
+import Ajv, { ErrorObject } from 'ajv';
 
-const validator = (item) => {
+const validateItem = (item: object) => {
 	const jsonValidator = new Ajv();
+	console.log(item);
 
 	const schema = {
 		type: 'object',
 		properties: {
 			name: { type: 'string' },
 			color: { type: 'string' },
-			price: { type: 'number' },
+			price: { type: 'string' },
 		},
 		required: ['name', 'color', 'price'],
 	};
@@ -21,10 +22,14 @@ const validator = (item) => {
 	};
 
 	const validate = jsonValidator.compile(schema);
-	const valid = validate(data);
-	console.log(valid);
-	if (!valid) console.log(validate.errors);
+	const valid = validate(item);
+
+	if (!valid && validate.errors && validate.errors[0]) {
+		const { keyword, message } = validate.errors[0];
+		console.log(`${keyword}: ${message}`);
+		return `${keyword}: ${message}`;
+	}
 	return valid;
 };
 
-export default validator;
+export default validateItem;

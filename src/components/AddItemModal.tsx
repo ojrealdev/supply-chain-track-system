@@ -1,5 +1,5 @@
 import React, { FormEvent, useState, useEffect } from 'react';
-import validator from '../utils/JsonValidator';
+import validateItem from '../utils/JsonValidator';
 
 type AddItemModalProps = {
 	isOpen: boolean;
@@ -13,12 +13,26 @@ const AddItemModal: React.FC<AddItemModalProps> = ({ isOpen, closeModal }) => {
 
 	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
-		const newItem = { name, color, price };
+		console.log(color, name, price);
+
+		const newItem = {
+			name: name === '' ? null : name,
+			color: color === '' ? null : color,
+			price: price === '' ? null : price,
+		};
+		validateItem(newItem);
 		console.log(newItem);
 	};
 
+	const handleClose = () => {
+		closeModal();
+		setName('');
+		setColor('');
+		setPrice('');
+	};
+
 	useEffect(() => {
-		console.log(validator('d'));
+		console.log(validateItem({ name: 'iphone' }));
 	}, []);
 
 	return (
@@ -86,7 +100,7 @@ const AddItemModal: React.FC<AddItemModalProps> = ({ isOpen, closeModal }) => {
 								<button
 									type='button'
 									className='inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 sm:mt-0 sm:w-auto sm:text-sm'
-									onClick={closeModal}
+									onClick={handleClose}
 								>
 									Close
 								</button>
