@@ -37,10 +37,22 @@ module.exports = {
 					800: '#2d3748',
 					900: '#1a202c',
 				},
-				'custom-blue': '#2F3755',
+				// 'custom-blue': '#2F3755',
+				'custom-blue': '#5F6795',
 			},
 			lineHeight: {
 				hero: '4.5rem',
+			},
+		},
+		container: {
+			center: true,
+			padding: '1rem',
+			screens: {
+				sm: '90%',
+				md: '100%',
+				lg: '800px',
+				xl: '800px',
+				'2xl': '800px',
 			},
 		},
 	},
