@@ -25,9 +25,12 @@ const validateItem = (item: object) => {
 	const valid = validate(item);
 
 	if (!valid && validate.errors && validate.errors[0]) {
-		const { keyword, message } = validate.errors[0];
-		console.log(`${keyword}: ${message}`);
-		return `${keyword}: ${message}`;
+		const { instancePath } = validate.errors[0];
+		const msg = `please enter valid ${instancePath}`;
+		const processedMsg = msg.replace(/[^a-zA-Z\s]/g, '');
+
+		console.log(processedMsg);
+		return processedMsg;
 	}
 	return valid;
 };

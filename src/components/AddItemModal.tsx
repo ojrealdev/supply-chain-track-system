@@ -10,18 +10,22 @@ const AddItemModal: React.FC<AddItemModalProps> = ({ isOpen, closeModal }) => {
 	const [name, setName] = useState('');
 	const [color, setColor] = useState('');
 	const [price, setPrice] = useState('');
+	const [errorMsg, setErrorMsg] = useState(null);
 
 	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault();
-		console.log(color, name, price);
-
 		const newItem = {
 			name: name === '' ? null : name,
 			color: color === '' ? null : color,
 			price: price === '' ? null : price,
 		};
-		validateItem(newItem);
-		console.log(newItem);
+		const validate = validateItem(newItem);
+		if (validate !== true) {
+			setErrorMsg(validate);
+		} else {
+			setErrorMsg(null);
+		}
+		console.log(validate);
 	};
 
 	const handleClose = () => {
@@ -30,10 +34,6 @@ const AddItemModal: React.FC<AddItemModalProps> = ({ isOpen, closeModal }) => {
 		setColor('');
 		setPrice('');
 	};
-
-	useEffect(() => {
-		console.log(validateItem({ name: 'iphone' }));
-	}, []);
 
 	return (
 		<>
@@ -87,6 +87,14 @@ const AddItemModal: React.FC<AddItemModalProps> = ({ isOpen, closeModal }) => {
 											value={price}
 											onChange={(e) => setPrice(e.target.value)}
 										/>
+										{errorMsg && (
+											<div
+												className='w-full p-3 mb-4 text-sm text-red-800 rounded-lg bg-red-50 bg-red-50 dark:text-red-400'
+												role='alert'
+											>
+												<span className='font-medium'>Error!</span> {errorMsg}
+											</div>
+										)}
 										<button
 											type='submit'
 											className='flex h-8 w-full items-center justify-center rounded-full bg-custom-blue px-8 text-white hover:bg-blue-400'
