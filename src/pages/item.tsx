@@ -1,6 +1,17 @@
 import AddItemModal from '@/components/AddItemModal';
 import SearchForm from '@/components/SearchForm';
 import React, { useEffect, useState } from 'react';
+import Select from 'react-select';
+
+type OptionType = {
+	label: string;
+	value: string;
+};
+
+const options: OptionType[] = [
+	{ value: 'latest', label: 'Latest Event' },
+	{ value: 'all', label: 'All Events' },
+];
 
 type Item = {
 	id: string;
@@ -12,6 +23,9 @@ type Item = {
 const ItemList: React.FC = () => {
 	const [items, setItems] = useState<Item[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
+	const [filter, setFilter] = useState<OptionType | null>(
+		options[0] || { value: '', label: '' }
+	);
 
 	const closeModal = () => setIsOpen(false);
 	const openModal = () => setIsOpen(true);
@@ -32,7 +46,7 @@ const ItemList: React.FC = () => {
 	}, []);
 
 	return (
-		<div className='container mx-auto px-4 sticky'>
+		<div className='container sticky mx-auto px-4'>
 			<SearchForm openModal={openModal} />
 			<AddItemModal
 				isOpen={isOpen}
@@ -43,9 +57,18 @@ const ItemList: React.FC = () => {
 				{items.map((item) => (
 					<div
 						key={item.id}
-						className='mb-4 rounded-lg border-2 border-gray-300 bg-white p-4 text-sm'
+						className='item mb-4 rounded-lg border-2 border-gray-300 bg-white p-4 text-sm'
 					>
-						<h3 className='mb-2 text-xl font-semibold'>{item.name}</h3>
+						<div className='flex justify-between'>
+							<h3 className='mb-2 text-xl font-semibold'>{item.name}</h3>
+							<Select
+								className='item-filter md:w-1/4'
+								defaultValue={options[0]}
+								options={options}
+								isSearchable={false}
+								onChange={setFilter}
+							/>
+						</div>
 						<p className='mb-2'>
 							<strong>Color:</strong> {item.color}
 						</p>

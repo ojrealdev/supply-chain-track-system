@@ -11,8 +11,8 @@ type SearchFormProps = {
 };
 
 const options: OptionType[] = [
-	{ value: 'all', label: 'All Events' },
-	{ value: 'latest', label: 'Latest Event' },
+	{ value: 'all', label: 'All Items' },
+	{ value: 'latest', label: 'Latest Items' },
 ];
 
 const SearchForm: React.FC<SearchFormProps> = ({ openModal }) => {

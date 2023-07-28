@@ -3,3 +3,11 @@
 @tailwind components;
 
 @tailwind utilities;
+
+.item-filter {
+	display: none;
+}
+
+.item:hover .item-filter {
+	display: block;
+}
