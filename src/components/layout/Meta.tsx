@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { NextSeo } from 'next-seo';
 
-import { AppConfig } from '../utils/AppConfig';
+import { AppConfig } from '../../utils/AppConfig';
 
 type IMetaProps = {
 	title: string;
@@ -27,7 +27,7 @@ const Meta = (props: IMetaProps) => {
 				/>
 				<link
 					rel='apple-touch-icon'
-					href={`${router.basePath}/apple-touch-icon.png`}
+					href={`${router.basePath}/assets/iota_logo.png`}
 					key='apple'
 				/>
 				<link
@@ -46,7 +46,7 @@ const Meta = (props: IMetaProps) => {
 				/>
 				<link
 					rel='icon'
-					href={`${router.basePath}/favicon.ico`}
+					href={`${router.basePath}/assets/iota_logo.png`}
 					key='favicon'
 				/>
 			</Head>

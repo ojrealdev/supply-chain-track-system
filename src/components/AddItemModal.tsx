@@ -1,4 +1,5 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useState, useEffect } from 'react';
+import validator from '../utils/JsonValidator';
 
 type AddItemModalProps = {
 	isOpen: boolean;
@@ -6,7 +7,6 @@ type AddItemModalProps = {
 };
 
 const AddItemModal: React.FC<AddItemModalProps> = ({ isOpen, closeModal }) => {
-	// const [isOpen, setIsOpen] = useState(false);
 	const [name, setName] = useState('');
 	const [color, setColor] = useState('');
 	const [price, setPrice] = useState('');
@@ -17,18 +17,12 @@ const AddItemModal: React.FC<AddItemModalProps> = ({ isOpen, closeModal }) => {
 		console.log(newItem);
 	};
 
-	// const closeModal = () => setIsOpen(false);
-	// const openModal = () => setIsOpen(true);
+	useEffect(() => {
+		console.log(validator('d'));
+	}, []);
 
 	return (
 		<>
-			{/* <button
-				className='flex h-8 items-center justify-center rounded-full bg-custom-blue px-8 text-white hover:bg-blue-600'
-				onClick={openModal}
-			>
-				Add Item
-			</button> */}
-
 			{isOpen && (
 				<div
 					className='fixed inset-0 z-10 overflow-y-auto'
