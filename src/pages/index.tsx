@@ -1,5 +1,4 @@
-import { Base } from '../components/Base';
+import ItemList from './item';
 
-const Index = () => <Base />;
-
+const Index = () => <ItemList />;
 export default Index;

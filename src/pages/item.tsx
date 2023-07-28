@@ -22,35 +22,39 @@ const ItemList: React.FC = () => {
 			{ id: '2', name: 'Item 2', color: 'Blue', price: 150 },
 			{ id: '3', name: 'Item 3', color: 'Black', price: 200 },
 			{ id: '4', name: 'Item 4', color: 'Orange', price: 250 },
-			{ id: '5', name: 'Item 5', color: 'Orange', price: 250 },
-			{ id: '6', name: 'Item 6', color: 'Orange', price: 250 },
-			// Add more items...
+			{ id: '5', name: 'Item 5', color: 'Teal', price: 250 },
+			{ id: '6', name: 'Item 6', color: 'Yellow', price: 250 },
+			{ id: '7', name: 'Item 7', color: 'Green', price: 250 },
+			{ id: '8', name: 'Item 8', color: 'White', price: 250 },
+			{ id: '9', name: 'Item 9', color: 'Grey', price: 250 },
 		];
 		setItems(fetchedItems);
 	}, []);
 
 	return (
-		<div className='max-h-82 container mx-auto overflow-y-auto px-4'>
+		<div className='container mx-auto px-4 sticky'>
 			<SearchForm openModal={openModal} />
 			<AddItemModal
 				isOpen={isOpen}
 				closeModal={closeModal}
 			/>
 			<h2 className='mb-4 text-2xl font-bold'>Items</h2>
-			{items.map((item) => (
-				<div
-					key={item.id}
-					className='mb-4 rounded-lg border-2 border-gray-300 bg-white p-4 text-sm'
-				>
-					<h3 className='mb-2 text-xl font-semibold'>{item.name}</h3>
-					<p className='mb-2'>
-						<strong>Color:</strong> {item.color}
-					</p>
-					<p>
-						<strong>Price:</strong> ${item.price}
-					</p>
-				</div>
-			))}
+			<div className='max-h-screen overflow-y-auto'>
+				{items.map((item) => (
+					<div
+						key={item.id}
+						className='mb-4 rounded-lg border-2 border-gray-300 bg-white p-4 text-sm'
+					>
+						<h3 className='mb-2 text-xl font-semibold'>{item.name}</h3>
+						<p className='mb-2'>
+							<strong>Color:</strong> {item.color}
+						</p>
+						<p>
+							<strong>Price:</strong> ${item.price}
+						</p>
+					</div>
+				))}
+			</div>
 		</div>
 	);
 };
