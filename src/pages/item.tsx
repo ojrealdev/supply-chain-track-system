@@ -63,6 +63,9 @@ const ItemList: FC = () => {
 								<p>
 									<strong>Price:</strong> ${item.price}
 								</p>
+								<p className='mb-1'>
+									<strong>Event:</strong> {'customer'.slice(0, 6) + '...'}
+								</p>
 							</div>
 							<div>
 								<img

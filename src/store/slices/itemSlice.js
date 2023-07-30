@@ -119,6 +119,26 @@ export const searchItemByName = createAsyncThunk(
 	}
 );
 
+export const filterItemsByLatest = createAsyncThunk(
+	'items/getItems',
+	async (name, thunkAPI) => {
+		try {
+			const config = {
+				method: 'get',
+				url: `http://localhost:3001/api/items/latest`,
+				headers: {},
+			};
+
+			const items = await axios(config);
+			return items;
+		} catch (error) {
+			return thunkAPI.rejectWithValue(
+				'something went wrong while fetching latest items!'
+			);
+		}
+	}
+);
+
 /* eslint-disable no-param-reassign */
 
 const itemsSlice = createSlice({

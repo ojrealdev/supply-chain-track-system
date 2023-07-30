@@ -3,6 +3,7 @@ import Select from 'react-select';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchItemByName } from '../store/slices/itemSlice';
 import debounce from '../utils/debounce';
+import { getItems, filterItemsByLatest } from '../store/slices/itemSlice';
 
 type OptionType = {
 	label: string;
@@ -25,26 +26,23 @@ const SearchForm: React.FC<SearchFormProps> = ({ openModal }) => {
 		options[0] || { value: '', label: '' }
 	);
 
-	const handleSubmit = (e: FormEvent) => {
-		e.preventDefault();
-		console.log('Search Term:', searchTerm);
-		console.log('Filter:', filter);
-	};
-
 	const handleSearchItem = (searchValue: string) => {
 		console.log(`Search value: ${searchValue}`);
 		setSearchTerm(searchValue);
-		const debouncedSearchItem = debounce((searchValue: string) => {
+		debounce((searchValue: string) => {
 			setSearchTerm(searchValue);
 		}, 400);
 		dispatch(searchItemByName(searchValue));
 	};
 
+	const handleFilterItems = (value: string) => {
+		console.log(value);
+		if (value === 'latest') dispatch(filterItemsByLatest());
+		if (value === 'all') dispatch(getItems());
+	};
+
 	return (
-		<form
-			onSubmit={handleSubmit}
-			className='container top-0 mb-5 mt-10 flex flex-col items-center justify-center space-y-4 pt-24 md:flex-row md:space-x-4 md:space-y-0'
-		>
+		<form className='container top-0 mb-5 mt-10 flex flex-col items-center justify-center space-y-4 pt-24 md:flex-row md:space-x-4 md:space-y-0'>
 			<input
 				className='h-10 w-full rounded-lg border-2 border-gray-300 bg-white px-5 pr-16 text-sm focus:outline-none md:w-1/2'
 				type='search'
@@ -60,7 +58,10 @@ const SearchForm: React.FC<SearchFormProps> = ({ openModal }) => {
 				defaultValue={options[0]}
 				options={options}
 				isSearchable={false}
-				onChange={setFilter}
+				onChange={(searchTerm) => {
+					setFilter(searchTerm.value);
+					handleFilterItems(searchTerm.value);
+				}}
 			/>
 			<button
 				type='submit'
