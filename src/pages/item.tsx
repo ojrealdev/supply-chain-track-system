@@ -3,7 +3,8 @@ import SearchForm from '@/components/SearchForm';
 import React, { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
-import { getItems } from '@/store/slices/itemSlice';
+import { getItems } from '../store/slices/itemSlice';
+import { filterEventsByLatest, getEvents } from '../store/slices/eventSlice';
 
 type OptionType = {
 	label: string;
@@ -18,14 +19,18 @@ const options: OptionType[] = [
 const ItemList: FC = () => {
 	const dispatch = useDispatch();
 	const [isOpen, setIsOpen] = useState(false);
-	const [filter, setFilter] = useState<OptionType | null>(
-		options[0] || { value: '', label: '' }
-	);
 
 	const items = useSelector((state) => state.items.items);
 
 	const closeModal = () => setIsOpen(false);
 	const openModal = () => setIsOpen(true);
+
+	const handleFilterEvents = (value: string, itemId: string) => {
+		console.log('item::: ' + itemId);
+		localStorage.setItem('itemId', itemId);
+		if (value === 'latest') dispatch(filterEventsByLatest(itemId));
+		if (value === 'all') dispatch(getEvents());
+	};
 
 	useEffect(() => {
 		dispatch(getItems());
@@ -42,7 +47,7 @@ const ItemList: FC = () => {
 			<div className='max-h-screen overflow-y-auto'>
 				{items?.map((item) => (
 					<div
-						key={item.id}
+						key={item._id}
 						className='item mb-4 rounded-lg border-2 border-gray-300 bg-white p-4 text-sm'
 					>
 						<div className='flex justify-between'>
@@ -52,7 +57,10 @@ const ItemList: FC = () => {
 								defaultValue={options[0]}
 								options={options}
 								isSearchable={false}
-								onChange={setFilter}
+								onChange={(searchTerm) => {
+									console.log(item._id);
+									handleFilterEvents(searchTerm.value, item._id);
+								}}
 							/>
 						</div>
 						<div className='flex'>

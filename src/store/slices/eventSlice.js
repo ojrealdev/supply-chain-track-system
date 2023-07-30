@@ -81,12 +81,36 @@ export const getEvents = createAsyncThunk(
 	'events/getEvents',
 	async (name, thunkAPI) => {
 		try {
+			const itemId = localStorage.getItem('itemId');
+			console.log('itemId...');
 			const config = {
 				method: 'get',
-				url: `http://localhost:3001/api/items`,
+				url: `http://localhost:3001/api/events/${itemId}`,
 				headers: {
 					// Authorization: `Bearer ${token}`,
 				},
+			};
+
+			const events = await axios(config);
+			return events;
+		} catch (error) {
+			return thunkAPI.rejectWithValue(
+				'something went wrong while fetching events!'
+			);
+		}
+	}
+);
+
+export const filterEventsByLatest = createAsyncThunk(
+	'events/getEvents',
+	async (name, thunkAPI) => {
+		try {
+			const itemId = localStorage.getItem('itemId');
+			console.log(`itemId:...${itemId}`);
+			const config = {
+				method: 'get',
+				url: `http://localhost:3001/api/events/${itemId}`,
+				headers: {},
 			};
 
 			const events = await axios(config);

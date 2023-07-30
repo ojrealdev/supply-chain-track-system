@@ -22,9 +22,6 @@ const options: OptionType[] = [
 const SearchForm: React.FC<SearchFormProps> = ({ openModal }) => {
 	const dispatch = useDispatch();
 	const [searchTerm, setSearchTerm] = useState('');
-	const [filter, setFilter] = useState<OptionType | null>(
-		options[0] || { value: '', label: '' }
-	);
 
 	const handleSearchItem = (searchValue: string) => {
 		console.log(`Search value: ${searchValue}`);
@@ -59,7 +56,6 @@ const SearchForm: React.FC<SearchFormProps> = ({ openModal }) => {
 				options={options}
 				isSearchable={false}
 				onChange={(searchTerm) => {
-					setFilter(searchTerm.value);
 					handleFilterItems(searchTerm.value);
 				}}
 			/>
