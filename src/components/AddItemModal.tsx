@@ -1,4 +1,6 @@
 import React, { FormEvent, useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { createItem } from '@/store/slices/itemSlice';
 import validateItem from '../utils/JsonValidator';
 
 type AddItemModalProps = {
@@ -10,6 +12,7 @@ const AddItemModal: React.FC<AddItemModalProps> = ({
 	isOpenItemFormModal,
 	closeModal,
 }) => {
+	const dispatch = useDispatch();
 	const [name, setName] = useState('');
 	const [color, setColor] = useState('');
 	const [price, setPrice] = useState('');
@@ -27,6 +30,7 @@ const AddItemModal: React.FC<AddItemModalProps> = ({
 			setErrorMsg(validate);
 		} else {
 			setErrorMsg(null);
+			dispatch(createItem(newItem));
 		}
 		console.log(validate);
 	};

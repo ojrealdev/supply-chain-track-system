@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterEventsByLatest, getEvents } from '@/store/slices/eventSlice';
+import { getCurrentEvent, getEvents } from '@/store/slices/eventSlice';
 
 type ListItemEventsModalProps = {
 	isOpenEventsModal: boolean;
@@ -42,7 +42,7 @@ const ListEventsModal: React.FC<ListItemEventsModalProps> = (props) => {
 									<div className='bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4'>
 										<div className='sm:flex sm:items-start'>
 											<div className='mr:20'>
-												<span className='inline-block bg-custom-blue text-white text-xs px-2 rounded-full uppercase font-semibold tracking-wide'>
+												<span className='inline-block bg-custom-blue text-white text-xs px-2 rounded-full uppercase font-semibold tracking-wide mb-3'>
 													Step 1: Initiated
 												</span>
 												<p>
@@ -63,7 +63,7 @@ const ListEventsModal: React.FC<ListItemEventsModalProps> = (props) => {
 									</div>
 									<hr className='bg-black w-full' />
 									<div className='bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4 '>
-										<span className='inline-block bg-custom-blue text-white text-xs px-2 rounded-full uppercase font-semibold tracking-wide'>
+										<span className='inline-block bg-custom-blue text-white text-xs px-2 rounded-full uppercase font-semibold tracking-wide mb-3'>
 											Step 2: Processing
 										</span>
 										<div className='sm:flex sm:items-start'>
@@ -87,7 +87,7 @@ const ListEventsModal: React.FC<ListItemEventsModalProps> = (props) => {
 									<hr className='bg-black w-full' />
 
 									<div className='bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4 '>
-										<span className='inline-block bg-custom-blue text-white text-xs px-2 rounded-full uppercase font-semibold tracking-wide'>
+										<span className='inline-block bg-custom-blue text-white text-xs px-2 rounded-full uppercase font-semibold tracking-wide mb-3'>
 											Step 3: Delivered
 										</span>
 										<div className='sm:flex sm:items-start'>

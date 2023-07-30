@@ -12,6 +12,8 @@ export const createItem = createAsyncThunk(
 	'items/createItem',
 	async (data, thunkAPI) => {
 		const itemData = JSON.stringify(data);
+		console.log(data);
+
 		try {
 			const config = {
 				method: 'post',

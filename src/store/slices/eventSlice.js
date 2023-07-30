@@ -101,15 +101,15 @@ export const getEvents = createAsyncThunk(
 	}
 );
 
-export const filterEventsByLatest = createAsyncThunk(
-	'events/filterEventsByLatest',
+export const getCurrentEvent = createAsyncThunk(
+	'events/getCurrentEvent',
 	async (name, thunkAPI) => {
 		try {
 			const itemId = localStorage.getItem('itemId');
 			console.log(`itemId:...${itemId}`);
 			const config = {
 				method: 'get',
-				url: `http://localhost:3001/api/events/${itemId}`,
+				url: `http://localhost:3001/api/events/${itemId}/latest`,
 				headers: {},
 			};
 

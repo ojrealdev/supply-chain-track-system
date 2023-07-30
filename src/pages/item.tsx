@@ -4,7 +4,11 @@ import React, { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import { getItems } from '../store/slices/itemSlice';
-import { filterEventsByLatest, getEvents } from '../store/slices/eventSlice';
+import {
+	filterEventsByLatest,
+	getCurrentEvent,
+	getEvents,
+} from '../store/slices/eventSlice';
 import ListEventsModal from '@/components/ListItemEventsModal';
 
 type OptionType = {
@@ -31,7 +35,7 @@ const ItemList: FC = () => {
 	const handleFilterEvents = (value: string, itemId: string) => {
 		console.log('item::: ' + itemId);
 		localStorage.setItem('itemId', itemId);
-		if (value === 'latest') dispatch(filterEventsByLatest());
+		if (value === 'latest') dispatch(getCurrentEvent());
 		if (value === 'all') dispatch(getEvents());
 		setIsOpenEventsModal(true);
 	};
