@@ -11,3 +11,15 @@
 .item:hover .item-filter {
 	display: block;
 }
+
+.option {
+	@apply bg-custom-blue text-black;
+}
+
+.option-focused {
+	@apply bg-lime-100 text-black;
+}
+
+.option-normal {
+	@apply bg-white text-black;
+}

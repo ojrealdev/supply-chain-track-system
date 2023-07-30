@@ -11,8 +11,8 @@ type SearchFormProps = {
 };
 
 const options: OptionType[] = [
-	{ value: 'all', label: 'All Items' },
-	{ value: 'latest', label: 'Latest Items' },
+	{ value: 'all', label: 'All Items Filter' },
+	{ value: 'latest', label: 'Latest Items Filter' },
 ];
 
 const SearchForm: React.FC<SearchFormProps> = ({ openModal }) => {
@@ -36,7 +36,7 @@ const SearchForm: React.FC<SearchFormProps> = ({ openModal }) => {
 				className='h-10 w-full rounded-lg border-2 border-gray-300 bg-white px-5 pr-16 text-sm focus:outline-none md:w-1/2'
 				type='search'
 				name='search'
-				placeholder='Search Item by ID...'
+				placeholder='Search Item by name...'
 				value={searchTerm}
 				onChange={(e) => setSearchTerm(e.target.value)}
 			/>

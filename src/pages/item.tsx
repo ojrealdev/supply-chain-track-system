@@ -9,7 +9,7 @@ type OptionType = {
 };
 
 const options: OptionType[] = [
-	{ value: 'latest', label: 'Latest Event' },
+	{ value: 'latest', label: 'Latest Events' },
 	{ value: 'all', label: 'All Events' },
 ];
 
@@ -60,7 +60,7 @@ const ItemList: React.FC = () => {
 						className='item mb-4 rounded-lg border-2 border-gray-300 bg-white p-4 text-sm'
 					>
 						<div className='flex justify-between'>
-							<h3 className='mb-2 text-xl font-semibold'>{item.name}</h3>
+							<h3 className='mb-1 text-xl font-semibold'>{item.name}</h3>
 							<Select
 								className='item-filter md:w-1/4'
 								defaultValue={options[0]}
@@ -69,12 +69,22 @@ const ItemList: React.FC = () => {
 								onChange={setFilter}
 							/>
 						</div>
-						<p className='mb-2'>
-							<strong>Color:</strong> {item.color}
-						</p>
-						<p>
-							<strong>Price:</strong> ${item.price}
-						</p>
+						<div className='flex'>
+							<div className='mr:20'>
+								<p className='mb-1'>
+									<strong>Color:</strong> {item.color}
+								</p>
+								<p>
+									<strong>Price:</strong> ${item.price}
+								</p>
+							</div>
+							<div>
+								<img
+									src='https://sani-ecommerce.s3.amazonaws.com/lightscape-0BhsN70JVA8-unsplash.jpg'
+									className='h-16 w-32 ml-10'
+								/>
+							</div>
+						</div>
 					</div>
 				))}
 			</div>
