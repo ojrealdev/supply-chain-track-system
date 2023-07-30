@@ -15,37 +15,7 @@ export const createItem = createAsyncThunk(
 		try {
 			const config = {
 				method: 'post',
-				url: 'http://gateway-fintech-bespoke.apps.devocp.safaricom.net/kaa/item/register',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				data: itemData,
-			};
-
-			const item = await axios(config);
-			return item;
-		} catch (error) {
-			return thunkAPI.rejectWithValue(error.json);
-		}
-	}
-);
-
-export const verifyNewItem = createAsyncThunk(
-	'items/verifyNewUser',
-	async (data, thunkAPI) => {
-		const { phoneNumber, email, username, role, employeeNumber } = data;
-		const itemData = JSON.stringify({
-			phoneNumber,
-			email,
-			username,
-			roleId: role,
-			employeeNumber,
-			branchId: 0,
-		});
-		try {
-			const config = {
-				method: 'post',
-				url: `http://ms-kaa-item-auth-fintech-bespoke.apps.devocp.safaricom.net/item/register`,
+				url: 'localhost:3001/api/items',
 				headers: {
 					'Content-Type': 'application/json',
 				},
@@ -72,7 +42,6 @@ export const editItem = createAsyncThunk(
 				url: `${'baseUrl'}/api/items/${id}`,
 				headers: {
 					'Content-Type': 'application/json',
-					// Authorization: `Bearer ${token}`,
 				},
 				data,
 			};
@@ -116,9 +85,7 @@ export const getItems = createAsyncThunk(
 			const config = {
 				method: 'get',
 				url: `${'baseUrl'}/api/items`,
-				headers: {
-					// Authorization: `Bearer ${token}`,
-				},
+				headers: {},
 			};
 
 			const items = await axios(config);

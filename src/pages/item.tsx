@@ -1,7 +1,9 @@
 import AddItemModal from '@/components/AddItemModal';
 import SearchForm from '@/components/SearchForm';
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Select from 'react-select';
+import { } from '../store/slices/it'
 
 type OptionType = {
 	label: string;
@@ -21,6 +23,7 @@ type Item = {
 };
 
 const ItemList: React.FC = () => {
+	const dispatch = useDispatch();
 	const [items, setItems] = useState<Item[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
 	const [filter, setFilter] = useState<OptionType | null>(
