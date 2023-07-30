@@ -1,5 +1,8 @@
 import React, { FormEvent, useState } from 'react';
 import Select from 'react-select';
+import { useDispatch, useSelector } from 'react-redux';
+import { searchItemByName } from '../store/slices/itemSlice';
+import debounce from '../utils/debounce';
 
 type OptionType = {
 	label: string;
@@ -16,6 +19,7 @@ const options: OptionType[] = [
 ];
 
 const SearchForm: React.FC<SearchFormProps> = ({ openModal }) => {
+	const dispatch = useDispatch();
 	const [searchTerm, setSearchTerm] = useState('');
 	const [filter, setFilter] = useState<OptionType | null>(
 		options[0] || { value: '', label: '' }
@@ -25,6 +29,15 @@ const SearchForm: React.FC<SearchFormProps> = ({ openModal }) => {
 		e.preventDefault();
 		console.log('Search Term:', searchTerm);
 		console.log('Filter:', filter);
+	};
+
+	const handleSearchItem = (searchValue: string) => {
+		console.log(`Search value: ${searchValue}`);
+		setSearchTerm(searchValue);
+		const debouncedSearchItem = debounce((searchValue: string) => {
+			setSearchTerm(searchValue);
+		}, 400);
+		dispatch(searchItemByName(searchValue));
 	};
 
 	return (
@@ -38,7 +51,9 @@ const SearchForm: React.FC<SearchFormProps> = ({ openModal }) => {
 				name='search'
 				placeholder='Search Item by name...'
 				value={searchTerm}
-				onChange={(e) => setSearchTerm(e.target.value)}
+				onChange={(e) => {
+					handleSearchItem(e.target.value);
+				}}
 			/>
 			<Select
 				className='w-full md:w-1/4'

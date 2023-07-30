@@ -98,6 +98,27 @@ export const getItems = createAsyncThunk(
 	}
 );
 
+export const searchItemByName = createAsyncThunk(
+	'items/searchByName',
+	async (name, thunkAPI) => {
+		try {
+			console.log('name is: ' + name);
+			const config = {
+				method: 'get',
+				url: `http://localhost:3001/api/items/search?name=${name}`,
+				headers: {},
+			};
+
+			const items = await axios(config);
+			return items;
+		} catch (error) {
+			return thunkAPI.rejectWithValue(
+				'something went wrong while searching items!'
+			);
+		}
+	}
+);
+
 /* eslint-disable no-param-reassign */
 
 const itemsSlice = createSlice({
@@ -142,6 +163,17 @@ const itemsSlice = createSlice({
 			state.isLoading = false;
 		},
 		[deleteItem.rejected]: (state) => {
+			state.isLoading = false;
+		},
+
+		[searchItemByName.pending]: (state) => {
+			state.isLoading = true;
+		},
+		[searchItemByName.fulfilled]: (state, payload) => {
+			state.isLoading = false;
+			state.items = payload.payload.data;
+		},
+		[searchItemByName.rejected]: (state) => {
 			state.isLoading = false;
 		},
 	},

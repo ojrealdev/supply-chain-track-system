@@ -1,6 +1,6 @@
 import AddItemModal from '@/components/AddItemModal';
 import SearchForm from '@/components/SearchForm';
-import React, { useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import { getItems } from '@/store/slices/itemSlice';
@@ -15,14 +15,7 @@ const options: OptionType[] = [
 	{ value: 'all', label: 'All Events' },
 ];
 
-type Item = {
-	id: string;
-	name: string;
-	color: string;
-	price: number;
-};
-
-const ItemList: React.FC = () => {
+const ItemList: FC = () => {
 	const dispatch = useDispatch();
 	const [isOpen, setIsOpen] = useState(false);
 	const [filter, setFilter] = useState<OptionType | null>(
