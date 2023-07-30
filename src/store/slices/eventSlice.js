@@ -102,7 +102,7 @@ export const getEvents = createAsyncThunk(
 );
 
 export const filterEventsByLatest = createAsyncThunk(
-	'events/getEvents',
+	'events/filterEventsByLatest',
 	async (name, thunkAPI) => {
 		try {
 			const itemId = localStorage.getItem('itemId');

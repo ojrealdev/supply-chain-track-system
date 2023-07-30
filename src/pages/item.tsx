@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import { getItems } from '../store/slices/itemSlice';
 import { filterEventsByLatest, getEvents } from '../store/slices/eventSlice';
+import ListEventsModal from '@/components/ListItemEventsModal';
 
 type OptionType = {
 	label: string;
@@ -12,24 +13,27 @@ type OptionType = {
 };
 
 const options: OptionType[] = [
-	{ value: 'latest', label: 'Latest Events' },
+	{ value: 'latest', label: 'Current Event' },
 	{ value: 'all', label: 'All Events' },
 ];
 
 const ItemList: FC = () => {
 	const dispatch = useDispatch();
-	const [isOpen, setIsOpen] = useState(false);
+	const [isOpenItemFormModal, setIsOpenItemFormModal] = useState(false);
+	const [isOpenEventsModal, setIsOpenEventsModal] = useState(false);
 
 	const items = useSelector((state) => state.items.items);
 
-	const closeModal = () => setIsOpen(false);
-	const openModal = () => setIsOpen(true);
+	const closeModal = () => setIsOpenItemFormModal(false);
+	const openModal = () => setIsOpenItemFormModal(true);
+	const closeEventsModal = () => setIsOpenEventsModal(false);
 
 	const handleFilterEvents = (value: string, itemId: string) => {
 		console.log('item::: ' + itemId);
 		localStorage.setItem('itemId', itemId);
-		if (value === 'latest') dispatch(filterEventsByLatest(itemId));
+		if (value === 'latest') dispatch(filterEventsByLatest());
 		if (value === 'all') dispatch(getEvents());
+		setIsOpenEventsModal(true);
 	};
 
 	useEffect(() => {
@@ -40,8 +44,12 @@ const ItemList: FC = () => {
 		<div className='container sticky mx-auto px-4'>
 			<SearchForm openModal={openModal} />
 			<AddItemModal
-				isOpen={isOpen}
+				isOpenItemFormModal={isOpenItemFormModal}
 				closeModal={closeModal}
+			/>
+			<ListEventsModal
+				isOpenEventsModal={isOpenEventsModal}
+				closeEventsModal={closeEventsModal}
 			/>
 			<h2 className='mb-4 text-2xl font-bold'>Items</h2>
 			<div className='max-h-screen overflow-y-auto'>

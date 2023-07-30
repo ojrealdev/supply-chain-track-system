@@ -2,11 +2,14 @@ import React, { FormEvent, useState, useEffect } from 'react';
 import validateItem from '../utils/JsonValidator';
 
 type AddItemModalProps = {
-	isOpen: boolean;
+	isOpenItemFormModal: boolean;
 	closeModal: () => void;
 };
 
-const AddItemModal: React.FC<AddItemModalProps> = ({ isOpen, closeModal }) => {
+const AddItemModal: React.FC<AddItemModalProps> = ({
+	isOpenItemFormModal,
+	closeModal,
+}) => {
 	const [name, setName] = useState('');
 	const [color, setColor] = useState('');
 	const [price, setPrice] = useState('');
@@ -33,11 +36,14 @@ const AddItemModal: React.FC<AddItemModalProps> = ({ isOpen, closeModal }) => {
 		setName('');
 		setColor('');
 		setPrice('');
+		setErrorMsg(null);
 	};
 
 	return (
 		<>
-			{isOpen && (
+			{console.log('isOpenItemFormModal2..')}
+			{console.log(isOpenItemFormModal)}
+			{isOpenItemFormModal && (
 				<div
 					className='fixed inset-0 z-10 overflow-y-auto'
 					aria-labelledby='modal-title'
