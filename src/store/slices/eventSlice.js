@@ -1,6 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import axios from 'axios';
 
 const initialState = {
@@ -15,7 +13,7 @@ export const createEvent = createAsyncThunk(
 		try {
 			const config = {
 				method: 'post',
-				url: 'localhost:3001/api/events',
+				url: 'http://localhost:3001/api/events',
 				headers: {
 					'Content-Type': 'application/json',
 				},
@@ -39,7 +37,7 @@ export const editEvent = createAsyncThunk(
 
 			const config = {
 				method: 'put',
-				url: `${'baseUrl'}/api/events/${id}`,
+				url: `http://localhost:3001/api/events/${id}`,
 				headers: {
 					'Content-Type': 'application/json',
 					// Authorization: `Bearer ${token}`,
@@ -64,7 +62,7 @@ export const deleteEvent = createAsyncThunk(
 
 			const config = {
 				method: 'delete',
-				url: `${'baseUrl'}/api/events/${id}`,
+				url: `http://localhost:3001/api/events/${id}`,
 				headers: {
 					'Content-Type': 'application/json',
 				},
@@ -85,7 +83,7 @@ export const getEvents = createAsyncThunk(
 		try {
 			const config = {
 				method: 'get',
-				url: `localhost:3001/api/items`,
+				url: `http://localhost:3001/api/items`,
 				headers: {
 					// Authorization: `Bearer ${token}`,
 				},

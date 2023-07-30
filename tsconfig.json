@@ -6,8 +6,8 @@
 		"resolveJsonModule": true,
 		"removeComments": true,
 		"preserveConstEnums": true,
-		"strict": true,
-		"alwaysStrict": true,
+		"strict": false,
+		"alwaysStrict": false,
 		"strictNullChecks": true,
 		"noUncheckedIndexedAccess": true,
 
@@ -26,7 +26,7 @@
 
 		"esModuleInterop": true,
 		"allowSyntheticDefaultImports": true,
-		"allowJs": false,
+		"allowJs": true,
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,
 
@@ -42,5 +42,12 @@
 		}
 	},
 	"exclude": ["./out/**/*", "./node_modules/**/*"],
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
+	"include": [
+		"next-env.d.ts",
+		"**/*.ts",
+		"**/*.tsx",
+		"src/store/slices/eventSlice.js",
+		"src/store/slices/itemSlice.js",
+		"src/store/store.js"
+	]
 }

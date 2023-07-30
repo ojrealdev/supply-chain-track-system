@@ -15,7 +15,7 @@ export const createItem = createAsyncThunk(
 		try {
 			const config = {
 				method: 'post',
-				url: 'localhost:3001/api/items',
+				url: 'http://localhost:3001/api/items',
 				headers: {
 					'Content-Type': 'application/json',
 				},
@@ -39,7 +39,7 @@ export const editItem = createAsyncThunk(
 
 			const config = {
 				method: 'put',
-				url: `${'baseUrl'}/api/items/${id}`,
+				url: `http://localhost:3001/api/items/${id}`,
 				headers: {
 					'Content-Type': 'application/json',
 				},
@@ -63,7 +63,7 @@ export const deleteItem = createAsyncThunk(
 
 			const config = {
 				method: 'delete',
-				url: `${'baseUrl'}/api/items/${id}`,
+				url: `http://localhost:3001/api/items/${id}`,
 				headers: {
 					'Content-Type': 'application/json',
 				},
@@ -84,7 +84,7 @@ export const getItems = createAsyncThunk(
 		try {
 			const config = {
 				method: 'get',
-				url: `${'baseUrl'}/api/items`,
+				url: `http://localhost:3001/api/items`,
 				headers: {},
 			};
 

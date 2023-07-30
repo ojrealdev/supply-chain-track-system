@@ -1,9 +1,9 @@
 import AddItemModal from '@/components/AddItemModal';
 import SearchForm from '@/components/SearchForm';
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
-import { } from '../store/slices/it'
+import { getItems } from '@/store/slices/itemSlice';
 
 type OptionType = {
 	label: string;
@@ -24,28 +24,18 @@ type Item = {
 
 const ItemList: React.FC = () => {
 	const dispatch = useDispatch();
-	const [items, setItems] = useState<Item[]>([]);
 	const [isOpen, setIsOpen] = useState(false);
 	const [filter, setFilter] = useState<OptionType | null>(
 		options[0] || { value: '', label: '' }
 	);
 
+	const items = useSelector((state) => state.items.items);
+
 	const closeModal = () => setIsOpen(false);
 	const openModal = () => setIsOpen(true);
 
 	useEffect(() => {
-		const fetchedItems: Item[] = [
-			{ id: '1', name: 'Item 1', color: 'Red', price: 100 },
-			{ id: '2', name: 'Item 2', color: 'Blue', price: 150 },
-			{ id: '3', name: 'Item 3', color: 'Black', price: 200 },
-			{ id: '4', name: 'Item 4', color: 'Orange', price: 250 },
-			{ id: '5', name: 'Item 5', color: 'Teal', price: 250 },
-			{ id: '6', name: 'Item 6', color: 'Yellow', price: 250 },
-			{ id: '7', name: 'Item 7', color: 'Green', price: 250 },
-			{ id: '8', name: 'Item 8', color: 'White', price: 250 },
-			{ id: '9', name: 'Item 9', color: 'Grey', price: 250 },
-		];
-		setItems(fetchedItems);
+		dispatch(getItems());
 	}, []);
 
 	return (
@@ -57,7 +47,7 @@ const ItemList: React.FC = () => {
 			/>
 			<h2 className='mb-4 text-2xl font-bold'>Items</h2>
 			<div className='max-h-screen overflow-y-auto'>
-				{items.map((item) => (
+				{items?.map((item) => (
 					<div
 						key={item.id}
 						className='item mb-4 rounded-lg border-2 border-gray-300 bg-white p-4 text-sm'
