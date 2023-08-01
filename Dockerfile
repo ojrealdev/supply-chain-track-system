@@ -1,23 +1,23 @@
-# Use the official lightweight Node.js 14 image.
-FROM node:14
-
-# Create app directory.
-WORKDIR /usr/src/app
-
-# Copy application dependency manifests to the container image.
+# ---- Base Node ----
+FROM node:16-alpine AS base
+WORKDIR /app
 COPY package*.json ./
 
-# Install production dependencies.
-RUN npm install
+# ---- Dependencies ----
+FROM base AS dependencies
+RUN npm ci
 
-# Copy local code to the container image.
-COPY . .
-
-# Build the application
+# ---- Copy Files/Build ----
+FROM dependencies AS build
+COPY . ./
 RUN npm run build
 
-# The application listens on port 3000.
-EXPOSE 3000
+# ---- Release ----
+FROM node:16-alpine AS release
+WORKDIR /app
+COPY --from=build /app/.next ./.next
+COPY --from=build /app/package*.json ./
+RUN npm ci --only=production
 
-# Run the web service on container startup.
-CMD [ "npm", "run", "start" ]
+# Default command, run the server in production mode
+CMD ["npm", "start"]
