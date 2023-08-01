@@ -39,7 +39,7 @@ export const editEvent = createAsyncThunk(
 
 			const config = {
 				method: 'put',
-				url: `http://localhost:3001/api/events/${id}`,
+				url: `${baseUrl}/api/events/${id}`,
 				headers: {
 					'Content-Type': 'application/json',
 					// Authorization: `Bearer ${token}`,
@@ -64,7 +64,7 @@ export const deleteEvent = createAsyncThunk(
 
 			const config = {
 				method: 'delete',
-				url: `http://localhost:3001/api/events/${id}`,
+				url: `${baseUrl}/api/events/${id}`,
 				headers: {
 					'Content-Type': 'application/json',
 				},
@@ -87,7 +87,7 @@ export const getEvents = createAsyncThunk(
 			console.log('itemId...');
 			const config = {
 				method: 'get',
-				url: `http://localhost:3001/api/events/${itemId}`,
+				url: `${baseUrl}/api/events/${itemId}`,
 				headers: {
 					// Authorization: `Bearer ${token}`,
 				},
@@ -111,7 +111,7 @@ export const getCurrentEvent = createAsyncThunk(
 			console.log(`itemId:...${itemId}`);
 			const config = {
 				method: 'get',
-				url: `http://localhost:3001/api/events/${itemId}/latest`,
+				url: `${baseUrl}/api/events/${itemId}/latest`,
 				headers: {},
 			};
 
