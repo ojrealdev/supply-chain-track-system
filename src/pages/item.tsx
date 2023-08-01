@@ -6,7 +6,6 @@ import AddItemModal from '@/components/AddItemModal';
 import AddEventModal from '@/components/AddEventModal';
 import { getItems } from '../store/slices/itemSlice';
 import {
-	filterEventsByLatest,
 	getCurrentEvent,
 	getEvents,
 } from '../store/slices/eventSlice';
@@ -39,7 +38,8 @@ const ItemList: FC = () => {
 
 	const handleFilterEvents = (value: string, itemId: string) => {
 		localStorage.setItem('itemId', itemId);
-		setItemId(itemId)
+		setItemId(itemId);
+		console.log(value + ': ' + itemId);
 		if (value === 'latest') {
 			dispatch(getCurrentEvent());
 			setIsOpenEventsModal(true);

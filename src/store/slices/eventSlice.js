@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { baseUrl } from '../../utils/baseUrl';
 
 const initialState = {
 	events: [],
@@ -14,7 +15,7 @@ export const createEvent = createAsyncThunk(
 		try {
 			const config = {
 				method: 'post',
-				url: 'http://localhost:3001/api/events',
+				url: `${baseUrl}/api/events`,
 				headers: {
 					'Content-Type': 'application/json',
 				},
@@ -139,6 +140,18 @@ const eventsSlice = createSlice({
 			state.events = payload.payload.data;
 		},
 		[getEvents.rejected]: (state) => {
+			state.isLoading = false;
+		},
+
+		[getCurrentEvent.pending]: (state) => {
+			state.isLoading = true;
+			state.isEventCreated = null;
+		},
+		[getCurrentEvent.fulfilled]: (state, payload) => {
+			state.isLoading = false;
+			state.events = payload.payload.data;
+		},
+		[getCurrentEvent.rejected]: (state) => {
 			state.isLoading = false;
 		},
 

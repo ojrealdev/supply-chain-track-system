@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getCurrentEvent, getEvents } from '@/store/slices/eventSlice';
+import { useSelector } from 'react-redux';
 
 type ListItemEventsModalProps = {
 	isOpenEventsModal: boolean;
@@ -9,7 +8,8 @@ type ListItemEventsModalProps = {
 
 const ListEventsModal: React.FC<ListItemEventsModalProps> = (props) => {
 	const { isOpenEventsModal, closeEventsModal } = props;
-	const dispatch = useDispatch();
+
+	const events = useSelector((state) => state.events.events);
 
 	// const eventsList = useSelector((state) => state);
 
@@ -40,74 +40,36 @@ const ListEventsModal: React.FC<ListItemEventsModalProps> = (props) => {
 							<div className='inline-block transform overflow-hidden rounded-lg bg-white text-left align-bottom shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:align-middle'>
 								<div className='container max-h-screen overflow-y-auto'>
 									<div className='bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4'>
-										<div className='sm:flex sm:items-start'>
-											<div className='mr:20'>
-												<span className='inline-block bg-custom-blue text-white text-xs px-2 rounded-full uppercase font-semibold tracking-wide mb-3'>
-													Step 1: Initiated
-												</span>
-												<p>
-													<strong>Custodian:</strong> ${'item.price item.price'}
-												</p>
-												<p className='mb-1'>
-													<strong>Status:</strong>{' '}
-													<span className='inline-block bg-green-600 text-white text-xs px-2 rounded-full uppercase font-semibold tracking-wide'>
-														Complete
-													</span>
-												</p>
-												<p className='mb-1'>
-													<strong>Created At:</strong>{' '}
-													{'customer'.slice(0, 6) + '...'}
-												</p>
+										{events.length > 0 ? (
+											events.map((event) => (
+												<div className='sm:flex sm:items-start'>
+													<div className='mr:20'>
+														<span className='inline-block bg-custom-blue text-white text-xs px-2 mt-5 rounded-full uppercase font-semibold tracking-wide mb-3'>
+															Step: {event.name}
+														</span>
+														<p>
+															<strong>Custodian:</strong> {event.custodian}
+														</p>
+														<p className='mb-1'>
+															<strong>Status:</strong>{' '}
+															<span className='inline-block bg-green-600 text-white text-xs px-2 rounded-full uppercase font-semibold tracking-wide'>
+																{event.status}
+															</span>
+														</p>
+														<p className=''>
+															<strong>Created At:</strong>{' '}
+															{event.createdAt}
+														</p>
+													</div>
+												</div>
+											))
+										) : (
+											<div className='bottom-6 m-1 bg-white text-red-500 py-2 px-4 rounded-md shadow-lg'>
+												<p>Sorry! no event created for this item yet.</p>
 											</div>
-										</div>
+										)}
 									</div>
 									<hr className='bg-black w-full' />
-									<div className='bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4 '>
-										<span className='inline-block bg-custom-blue text-white text-xs px-2 rounded-full uppercase font-semibold tracking-wide mb-3'>
-											Step 2: Processing
-										</span>
-										<div className='sm:flex sm:items-start'>
-											<div className='mr:20'>
-												<p className='mb-1'>
-													<strong>Custodian:</strong> {'item.color item.color'}
-												</p>
-												<p className='mb-1'>
-													<strong>Status:</strong>{' '}
-													<span className='inline-block bg-blue-600 text-white text-xs px-2 rounded-full uppercase font-semibold tracking-wide'>
-														Progress
-													</span>
-												</p>
-												<p className='mb-1'>
-													<strong>Created At:</strong>{' '}
-													{'customer'.slice(0, 6) + '...'}
-												</p>
-											</div>
-										</div>
-									</div>
-									<hr className='bg-black w-full' />
-
-									<div className='bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4 '>
-										<span className='inline-block bg-custom-blue text-white text-xs px-2 rounded-full uppercase font-semibold tracking-wide mb-3'>
-											Step 3: Delivered
-										</span>
-										<div className='sm:flex sm:items-start'>
-											<div className='mr:20'>
-												<p className='mb-1'>
-													<strong>Custodian:</strong> {'item.color'}
-												</p>
-												<p className='mb-1'>
-													<strong>Status:</strong>{' '}
-													<span className='inline-block bg-red-600 text-white text-xs px-2 rounded-full uppercase font-semibold tracking-wide'>
-														Waiting
-													</span>
-												</p>
-												<p className='mb-1'>
-													<strong>Created At:</strong>{' '}
-													{'customer'.slice(0, 6) + '...'}
-												</p>
-											</div>
-										</div>
-									</div>
 								</div>
 								<div className='bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6'>
 									<button
