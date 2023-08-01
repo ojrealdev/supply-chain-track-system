@@ -26,7 +26,7 @@ const ItemList: FC = () => {
 	const [isOpenEventsModal, setIsOpenEventsModal] = useState(false);
 	const [itemId, setItemId] = useState('');
 
-	const items = useSelector((state) => state.items.items);
+	const items = useSelector((state: any) => state.items.items);
 
 	const closeModal = () => setIsOpenItemFormModal(false);
 	const closeAddEventModal = () => setIsOpenAddEventModal(false);
@@ -72,7 +72,7 @@ const ItemList: FC = () => {
 			/>
 			<h2 className='mb-4 text-2xl font-bold'>Items</h2>
 			<div className='max-h-screen overflow-y-auto'>
-				{items?.map((item) => (
+				{items?.map((item: any) => (
 					<div
 						key={item._id}
 						className='item mb-4 rounded-lg border-2 border-gray-300 bg-white p-4 text-sm'
@@ -85,7 +85,8 @@ const ItemList: FC = () => {
 								options={options}
 								isSearchable={false}
 								onChange={(searchTerm) => {
-									handleFilterEvents(searchTerm.value, item._id);
+									if (searchTerm)
+										handleFilterEvents(searchTerm.value, item._id);
 								}}
 							/>
 						</div>
