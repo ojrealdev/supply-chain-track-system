@@ -5,10 +5,7 @@ import Select from 'react-select';
 import AddItemModal from '@/components/AddItemModal';
 import AddEventModal from '@/components/AddEventModal';
 import { getItems } from '../store/slices/itemSlice';
-import {
-	getCurrentEvent,
-	getEvents,
-} from '../store/slices/eventSlice';
+import { getCurrentEvent, getEvents } from '../store/slices/eventSlice';
 import ListEventsModal from '@/components/ListItemEventsModal';
 
 type OptionType = {

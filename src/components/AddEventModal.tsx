@@ -5,6 +5,7 @@ import { createEvent, getEvents } from '@/store/slices/eventSlice';
 type AddItemModalProps = {
 	isOpenAddEventModal: boolean;
 	closeAddEventModal: () => void;
+	currentItemId: string;
 };
 
 const AddEventModal: React.FC<AddItemModalProps> = ({
