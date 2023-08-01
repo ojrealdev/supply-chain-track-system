@@ -11,8 +11,7 @@
 		"clean": "rimraf .next .swc out",
 		"lint": "next lint",
 		"format": "next lint --fix && prettier '**/*.{json,yaml}' --write --ignore-path .gitignore",
-		"check-types": "tsc --noEmit --pretty",
-		"prepare": "husky install"
+		"check-types": "tsc --noEmit --pretty"
 	},
 	"dependencies": {
 		"@reduxjs/toolkit": "^1.9.5",
