@@ -1,4 +1,4 @@
-let withBundleAnalyzer = {};
+let withBundleAnalyzer;
 
 try {
 	// Try to load the bundle analyzer if it's available
@@ -7,6 +7,7 @@ try {
 	});
 } catch (error) {
 	console.warn('Bundle analyzer not available, continuing without it');
+	withBundleAnalyzer = (config) => config;
 }
 
 module.exports = withBundleAnalyzer({
