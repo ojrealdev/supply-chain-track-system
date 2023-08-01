@@ -139,6 +139,7 @@ const eventsSlice = createSlice({
 		[getEvents.rejected]: (state) => {
 			state.isLoading = false;
 		},
+		
 
 		[createEvent.pending]: (state) => {
 			state.isLoading = true;

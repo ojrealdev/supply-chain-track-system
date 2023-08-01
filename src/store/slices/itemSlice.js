@@ -6,6 +6,7 @@ import axios from 'axios';
 const initialState = {
 	items: [],
 	isLoading: true,
+	isCreated: null,
 };
 
 export const createItem = createAsyncThunk(
@@ -153,6 +154,7 @@ const itemsSlice = createSlice({
 		[getItems.fulfilled]: (state, payload) => {
 			state.isLoading = false;
 			state.items = payload.payload.data;
+			state.isCreated = null;
 		},
 		[getItems.rejected]: (state) => {
 			state.isLoading = false;
@@ -163,6 +165,7 @@ const itemsSlice = createSlice({
 		},
 		[createItem.fulfilled]: (state) => {
 			state.isLoading = false;
+			state.isCreated = true;
 		},
 		[createItem.rejected]: (state) => {
 			state.isLoading = false;
