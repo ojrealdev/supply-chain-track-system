@@ -1,8 +1,9 @@
-import AddItemModal from '@/components/AddItemModal';
 import SearchForm from '@/components/SearchForm';
 import React, { FC, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
+import AddItemModal from '@/components/AddItemModal';
+import AddEventModal from '@/components/AddEventModal';
 import { getItems } from '../store/slices/itemSlice';
 import {
 	filterEventsByLatest,
@@ -19,25 +20,37 @@ type OptionType = {
 const options: OptionType[] = [
 	{ value: 'latest', label: 'Current Event' },
 	{ value: 'all', label: 'All Events' },
+	{ value: 'add', label: 'Create Event' },
 ];
 
 const ItemList: FC = () => {
 	const dispatch = useDispatch();
 	const [isOpenItemFormModal, setIsOpenItemFormModal] = useState(false);
+	const [isOpenAddEventModal, setIsOpenAddEventModal] = useState(false);
 	const [isOpenEventsModal, setIsOpenEventsModal] = useState(false);
+	const [itemId, setItemId] = useState('');
 
 	const items = useSelector((state) => state.items.items);
 
 	const closeModal = () => setIsOpenItemFormModal(false);
+	const closeAddEventModal = () => setIsOpenAddEventModal(false);
 	const openModal = () => setIsOpenItemFormModal(true);
 	const closeEventsModal = () => setIsOpenEventsModal(false);
 
 	const handleFilterEvents = (value: string, itemId: string) => {
-		console.log('item::: ' + itemId);
 		localStorage.setItem('itemId', itemId);
-		if (value === 'latest') dispatch(getCurrentEvent());
-		if (value === 'all') dispatch(getEvents());
-		setIsOpenEventsModal(true);
+		setItemId(itemId)
+		if (value === 'latest') {
+			dispatch(getCurrentEvent());
+			setIsOpenEventsModal(true);
+		}
+		if (value === 'all') {
+			dispatch(getEvents());
+			setIsOpenEventsModal(true);
+		}
+		if (value === 'add') {
+			setIsOpenAddEventModal(true);
+		}
 	};
 
 	useEffect(() => {
@@ -50,6 +63,11 @@ const ItemList: FC = () => {
 			<AddItemModal
 				isOpenItemFormModal={isOpenItemFormModal}
 				closeModal={closeModal}
+			/>
+			<AddEventModal
+				isOpenAddEventModal={isOpenAddEventModal}
+				closeAddEventModal={closeAddEventModal}
+				currentItemId={itemId}
 			/>
 			<ListEventsModal
 				isOpenEventsModal={isOpenEventsModal}
@@ -70,7 +88,6 @@ const ItemList: FC = () => {
 								options={options}
 								isSearchable={false}
 								onChange={(searchTerm) => {
-									console.log(item._id);
 									handleFilterEvents(searchTerm.value, item._id);
 								}}
 							/>
