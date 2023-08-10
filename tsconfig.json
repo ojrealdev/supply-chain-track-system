@@ -43,11 +43,11 @@
 	},
 	"exclude": ["./out/**/*", "./node_modules/**/*"],
 	"include": [
-		"next-env.d.ts",
+		"next-env.d.js",
 		"**/*.ts",
 		"**/*.tsx",
 		"src/store/slices/eventSlice.js",
 		"src/store/slices/itemSlice.js",
 		"src/store/store.js"
-	]
+, "src/pages/_app.js", "src/pages/_document.js", "src/pages/index.js", "src/pages/item.js", "src/utils/AppConfig.js", "src/components/AddEventModal.js", "src/components/AddItemModal.js", "src/components/Background.js", "src/components/Button.js", "src/components/Footer.js", "src/components/Header.js", "src/components/ListItemEventsModal.js", "src/components/Loader.js", "src/components/Logo.js", "src/components/SearchForm.js"	]
 }

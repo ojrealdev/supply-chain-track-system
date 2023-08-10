@@ -4,15 +4,7 @@ import { createItem, getItems } from '@/store/slices/itemSlice';
 import validateItem from '../utils/JsonValidator';
 import Loader from './Loader';
 
-type AddItemModalProps = {
-	isOpenItemFormModal: boolean;
-	closeModal: () => void;
-};
-
-const AddItemModal: React.FC<AddItemModalProps> = ({
-	isOpenItemFormModal,
-	closeModal,
-}) => {
+const AddItemModal = ({ isOpenItemFormModal, closeModal }) => {
 	const dispatch = useDispatch();
 	const [name, setName] = useState('');
 	const [color, setColor] = useState('');
@@ -22,7 +14,7 @@ const AddItemModal: React.FC<AddItemModalProps> = ({
 	const isLoading = useSelector((state) => state.items.items.isLoading);
 	const isCreated = useSelector((state) => state.items.isCreated);
 
-	const handleCreateItem = (e: FormEvent) => {
+	const handleCreateItem = (e) => {
 		e.preventDefault();
 		const newItem = {
 			name: name === '' ? null : name,

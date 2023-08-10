@@ -1,12 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-type ListItemEventsModalProps = {
-	isOpenEventsModal: boolean;
-	closeEventsModal: () => void;
-};
-
-const ListEventsModal: React.FC<ListItemEventsModalProps> = (props) => {
+const ListEventsModal = (props) => {
 	const { isOpenEventsModal, closeEventsModal } = props;
 
 	const events = useSelector((state) => state.events.events);
@@ -57,8 +52,7 @@ const ListEventsModal: React.FC<ListItemEventsModalProps> = (props) => {
 															</span>
 														</p>
 														<p className=''>
-															<strong>Created At:</strong>{' '}
-															{event.createdAt}
+															<strong>Created At:</strong> {event.createdAt}
 														</p>
 													</div>
 												</div>

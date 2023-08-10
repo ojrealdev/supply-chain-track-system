@@ -2,13 +2,7 @@ import React, { FormEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createEvent, getEvents } from '@/store/slices/eventSlice';
 
-type AddItemModalProps = {
-	isOpenAddEventModal: boolean;
-	closeAddEventModal: () => void;
-	currentItemId: string;
-};
-
-const AddEventModal: React.FC<AddItemModalProps> = ({
+const AddEventModal = ({
 	isOpenAddEventModal,
 	closeAddEventModal,
 	currentItemId,
@@ -21,7 +15,7 @@ const AddEventModal: React.FC<AddItemModalProps> = ({
 	const items = useSelector((state) => state.items.items);
 	const isCreated = useSelector((state) => state.events.isEventCreated);
 
-	const handleCreateEvent = (e: FormEvent) => {
+	const handleCreateEvent = (e) => {
 		e.preventDefault();
 		const newEvent = {
 			name: name === '' ? null : name,

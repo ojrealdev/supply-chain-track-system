@@ -5,13 +5,8 @@
 		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
-		"build-stats": "cross-env ANALYZE=true npm run build",
 		"export": "next export",
-		"build-prod": "run-s clean build export",
-		"clean": "rimraf .next .swc out",
-		"lint": "next lint",
-		"format": "next lint --fix && prettier '**/*.{json,yaml}' --write --ignore-path .gitignore",
-		"check-types": "tsc --noEmit --pretty"
+		"build-prod": "run-s clean build export"
 	},
 	"dependencies": {
 		"@reduxjs/toolkit": "^1.9.5",
@@ -29,8 +24,6 @@
 	},
 	"devDependencies": {
 		"@next/bundle-analyzer": "^13.4.12",
-		"@types/node": "^20.4.4",
-		"@types/react": "^18.2.15",
 		"autoprefixer": "^10.4.14",
 		"cross-env": "^7.0.3",
 		"cssnano": "^6.0.1",

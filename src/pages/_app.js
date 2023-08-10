@@ -5,7 +5,7 @@ import { Header } from '../components/Header';
 import store from '../store/store';
 import '../styles/global.css';
 
-const MyApp = ({ Component, pageProps }: AppProps) => (
+const MyApp = ({ Component, pageProps }) => (
 	<>
 		<Header />
 		<Provider store={store}>

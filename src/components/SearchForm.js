@@ -5,34 +5,25 @@ import { searchItemByName } from '../store/slices/itemSlice';
 import { getItems, filterItemsByLatest } from '../store/slices/itemSlice';
 import debounce from '../utils/debounce';
 
-type OptionType = {
-	label: string;
-	value: string;
-};
-
-type SearchFormProps = {
-	openModal: () => void;
-};
-
-const options: OptionType[] = [
+const options = [
 	{ value: 'all', label: 'All Items Filter' },
 	{ value: 'latest', label: 'Latest Items Filter' },
 ];
 
-const SearchForm: React.FC<SearchFormProps> = ({ openModal }) => {
+const SearchForm = ({ openModal }) => {
 	const dispatch = useDispatch();
 	const [searchTerm, setSearchTerm] = useState('');
 
-	const handleSearchItem = (searchValue: string) => {
+	const handleSearchItem = (searchValue) => {
 		console.log(`Search value: ${searchValue}`);
 		setSearchTerm(searchValue);
-		debounce((searchValue: string) => {
+		debounce((searchValue) => {
 			setSearchTerm(searchValue);
 		}, 400);
 		dispatch(searchItemByName(searchValue));
 	};
 
-	const handleFilterItems = (value: string) => {
+	const handleFilterItems = (value) => {
 		console.log(value);
 		if (value === 'latest') dispatch(filterItemsByLatest());
 		if (value === 'all') dispatch(getItems());

@@ -1,5 +1,5 @@
 import SearchForm from '@/components/SearchForm';
-import React, { FC, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Select from 'react-select';
 import AddItemModal from '@/components/AddItemModal';
@@ -8,32 +8,27 @@ import { getItems } from '../store/slices/itemSlice';
 import { getCurrentEvent, getEvents } from '../store/slices/eventSlice';
 import ListEventsModal from '@/components/ListItemEventsModal';
 
-type OptionType = {
-	label: string;
-	value: string;
-};
-
-const options: OptionType[] = [
+const options = [
 	{ value: 'latest', label: 'Current Event' },
 	{ value: 'all', label: 'All Events' },
 	{ value: 'add', label: 'Create Event' },
 ];
 
-const ItemList: FC = () => {
+const ItemList = () => {
 	const dispatch = useDispatch();
 	const [isOpenItemFormModal, setIsOpenItemFormModal] = useState(false);
 	const [isOpenAddEventModal, setIsOpenAddEventModal] = useState(false);
 	const [isOpenEventsModal, setIsOpenEventsModal] = useState(false);
 	const [itemId, setItemId] = useState('');
 
-	const items = useSelector((state: any) => state.items.items);
+	const items = useSelector((state) => state.items.items);
 
 	const closeModal = () => setIsOpenItemFormModal(false);
 	const closeAddEventModal = () => setIsOpenAddEventModal(false);
 	const openModal = () => setIsOpenItemFormModal(true);
 	const closeEventsModal = () => setIsOpenEventsModal(false);
 
-	const handleFilterEvents = (value: string, itemId: string) => {
+	const handleFilterEvents = (value, itemId) => {
 		localStorage.setItem('itemId', itemId);
 		setItemId(itemId);
 		console.log(value + ': ' + itemId);
@@ -72,7 +67,7 @@ const ItemList: FC = () => {
 			/>
 			<h2 className='mb-4 text-2xl font-bold'>Items</h2>
 			<div className='max-h-screen overflow-y-auto'>
-				{items?.map((item: any) => (
+				{items?.map((item) => (
 					<div
 						key={item._id}
 						className='item mb-4 rounded-lg border-2 border-gray-300 bg-white p-4 text-sm'

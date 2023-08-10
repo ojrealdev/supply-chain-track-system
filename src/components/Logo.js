@@ -1,11 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import { AppConfig } from '../utils/AppConfig';
 
-type ILogoProps = {
-	xl?: boolean;
-};
-
-const Logo = (props: ILogoProps) => {
+const Logo = (props) => {
 	const fontStyle = props.xl
 		? 'font-semibold text-3xl'
 		: 'font-semibold text-xl';
