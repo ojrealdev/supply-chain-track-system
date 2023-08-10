@@ -1,9 +1,16 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import Ajv, { ErrorObject } from 'ajv';
+import Ajv from 'ajv';
 
 const validateItem = (item: object) => {
 	const jsonValidator = new Ajv();
 	console.log(item);
+
+	/**
+	const data = {
+		name: 'iphone 14 ProMax',
+		color: 'blue',
+		price: 2500,
+	};
+	*/
 
 	const schema = {
 		type: 'object',
@@ -13,12 +20,6 @@ const validateItem = (item: object) => {
 			price: { type: 'string' },
 		},
 		required: ['name', 'color', 'price'],
-	};
-
-	const data = {
-		name: 'iphone 14 ProMax',
-		color: 'blue',
-		price: 2500,
 	};
 
 	const validate = jsonValidator.compile(schema);
